@@ -92,6 +92,7 @@ class Bulk_Payment_WC {
         require_once BULK_PAYMENT_WC_PLUGIN_DIR . 'includes/class-bulk-payment-product-creator.php';
         require_once BULK_PAYMENT_WC_PLUGIN_DIR . 'includes/class-bulk-payment-shortcode.php';
         require_once BULK_PAYMENT_WC_PLUGIN_DIR . 'includes/class-bulk-payment-elementor.php';
+        require_once BULK_PAYMENT_WC_PLUGIN_DIR . 'includes/class-bulk-payment-updater.php';
     }
 
     /**
@@ -110,6 +111,9 @@ class Bulk_Payment_WC {
         if (Bulk_Payment_Elementor::is_elementor_active()) {
             Bulk_Payment_Elementor::get_instance();
         }
+
+        // Initialize GitHub auto-updater
+        Bulk_Payment_Updater::get_instance();
     }
 
     /**

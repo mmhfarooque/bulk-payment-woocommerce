@@ -1,0 +1,48 @@
+{
+    "name": "jezweb/bulk-payment-wc",
+    "description": "Allow customers to pay any amount of money for symbolic products without shipping information. Perfect for donations, custom payments, and flexible pricing.",
+    "type": "wordpress-plugin",
+    "keywords": [
+        "wordpress",
+        "woocommerce",
+        "payment",
+        "donation",
+        "flexible-pricing",
+        "custom-amount",
+        "bulk-payment"
+    ],
+    "homepage": "https://github.com/mmhfarooque/bulk-payment-woocommerce",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Mahmud Farooque",
+            "email": "mahmud@jezweb.com",
+            "homepage": "https://jezweb.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/mmhfarooque/bulk-payment-woocommerce/issues",
+        "source": "https://github.com/mmhfarooque/bulk-payment-woocommerce"
+    },
+    "require": {
+        "php": ">=7.4",
+        "composer/installers": "^1.0 || ^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "wp-coding-standards/wpcs": "^2.3"
+    },
+    "autoload": {
+        "classmap": [
+            "includes/"
+        ]
+    },
+    "extra": {
+        "installer-name": "bulk-payment-wc"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
