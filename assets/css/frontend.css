@@ -206,10 +206,11 @@
     padding: 16px 30px;
     font-size: 18px;
     font-weight: 700;
+    font-family: "baskerville-poster-pt", Georgia, serif;
     color: #fff !important;
     background: #2c3e50;
     border: none;
-    border-radius: 6px;
+    border-radius: 7px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;

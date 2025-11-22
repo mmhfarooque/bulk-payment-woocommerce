@@ -5,6 +5,17 @@ All notable changes to Bulk Payment for WooCommerce will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5] - 2025-11-22
+
+### Changed
+- Updated Pay Now button font to "baskerville-poster-pt" for improved typography
+- Increased Pay Now button border-radius from 6px to 7px for smoother corners
+
+### Added
+- GitHub-based automatic update system
+- Composer package support (jezweb/bulk-payment-wc)
+- Automated release creation script
+
 ## [1.0.4] - 2025-11-21
 
 ### Features
@@ -26,8 +37,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History
 
-### [1.0.4] - Current Release
-Current stable version with all core features.
+### [1.0.5] - Current Release
+Latest version with auto-updates and improved button styling.
+
+### [1.0.4] - Previous Release
+Initial public release with all core features.
 
 ---
 
