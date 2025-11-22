@@ -1,0 +1,178 @@
+/**
+ * Bulk Payment for WooCommerce - Admin Styles
+ *
+ * @package Bulk_Payment_WC
+ *
+ * Default neutral styles - can be customized via admin settings
+ */
+
+/* Product Meta Box Styles */
+.bulk-payment-options {
+    padding: 10px 0;
+}
+
+.bulk-payment-options p {
+    margin-bottom: 15px;
+}
+
+.bulk-payment-options label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.bulk-payment-options input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.bulk-payment-options input[type="text"],
+.bulk-payment-options input[type="number"] {
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+    color: #333;
+    background: #fff;
+}
+
+.bulk-payment-options input[type="text"]:focus,
+.bulk-payment-options input[type="number"]:focus {
+    border-color: #2271b1;
+    outline: none;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+
+.bulk-payment-options small {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Admin Settings Page */
+.bulk-payment-admin-header {
+    margin-bottom: 30px;
+}
+
+.bulk-payment-admin-header h2 {
+    margin-top: 0;
+    color: #23282d;
+    font-size: 24px;
+}
+
+.bulk-payment-admin-header p {
+    color: #666;
+}
+
+.bulk-payment-usage-info {
+    background: #f0f0f1 !important;
+}
+
+.bulk-payment-usage-info h3 {
+    color: #23282d;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.bulk-payment-usage-info ol,
+.bulk-payment-usage-info ul {
+    line-height: 1.8;
+}
+
+/* Product List Column */
+.column-bulk_payment {
+    width: 100px;
+    text-align: center;
+}
+
+.column-bulk_payment .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Quick Edit Styles */
+.inline-edit-col .bulk-payment-quick-edit {
+    clear: both;
+    padding: 10px 0;
+}
+
+/* Settings Form */
+.form-table th {
+    font-weight: 600;
+    color: #333;
+}
+
+.form-table td p.description {
+    margin-top: 5px;
+    font-style: italic;
+    color: #666;
+}
+
+/* Notice Styles */
+.bulk-payment-notice {
+    position: relative;
+    padding: 12px 15px;
+    margin: 15px 0;
+    border-left: 4px solid #72aee6;
+    background: #f0f6fc;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    color: #333;
+}
+
+.bulk-payment-notice.success {
+    border-left-color: #00a32a;
+    background: #dff0d8;
+}
+
+.bulk-payment-notice.error {
+    border-left-color: #d63638;
+    background: #f8d7da;
+}
+
+.bulk-payment-notice.warning {
+    border-left-color: #dba617;
+    background: #fcf3cf;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 782px) {
+    .column-bulk_payment {
+        width: 50px;
+    }
+
+    .bulk-payment-options input[type="text"],
+    .bulk-payment-options input[type="number"] {
+        width: 100% !important;
+    }
+}
+
+/* Admin Color Scheme Support */
+body.admin-color-light .bulk-payment-admin-header {
+    border-left-color: #0073aa;
+}
+
+body.admin-color-blue .bulk-payment-admin-header {
+    border-left-color: #52accc;
+}
+
+body.admin-color-coffee .bulk-payment-admin-header {
+    border-left-color: #59524c;
+}
+
+body.admin-color-ectoplasm .bulk-payment-admin-header {
+    border-left-color: #523f6d;
+}
+
+body.admin-color-midnight .bulk-payment-admin-header {
+    border-left-color: #e14d43;
+}
+
+body.admin-color-ocean .bulk-payment-admin-header {
+    border-left-color: #738e96;
+}
+
+body.admin-color-sunrise .bulk-payment-admin-header {
+    border-left-color: #dd823b;
+}

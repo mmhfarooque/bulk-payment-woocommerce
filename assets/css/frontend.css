@@ -1,0 +1,494 @@
+/**
+ * Bulk Payment for WooCommerce - Frontend Styles
+ *
+ * @package Bulk_Payment_WC
+ *
+ * Default neutral colors - can be customized via admin settings
+ */
+
+/* Main Container */
+.bulk-payment-form-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: #333;
+}
+
+/* Default Layout - Image Left, Content Right */
+.bulk-payment-form-container.layout-default {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.bulk-payment-form-container.layout-default.image-left {
+    flex-direction: row;
+}
+
+.bulk-payment-form-container.layout-default.image-right {
+    flex-direction: row-reverse;
+}
+
+.bulk-payment-form-container.layout-default.image-top {
+    flex-direction: column;
+}
+
+/* Image Styles */
+.bulk-payment-image {
+    flex: 0 0 45%;
+    max-width: 500px;
+}
+
+.bulk-payment-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Content Area */
+.bulk-payment-content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Title */
+.bulk-payment-title {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1.3;
+    margin: 0 0 20px 0;
+    color: #2c3e50;
+}
+
+/* Description */
+.bulk-payment-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Form Styles */
+.bulk-payment-form {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Amount Wrapper */
+.bulk-payment-amount-wrapper {
+    margin-bottom: 20px;
+}
+
+.bulk-payment-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Input Group */
+.bulk-payment-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 2px solid #2c3e50;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+.bulk-payment-input-group:focus-within {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* Currency Symbol */
+.bulk-payment-currency-symbol {
+    padding: 0 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.bulk-payment-currency-symbol.currency-left {
+    border-right: 1px solid #ddd;
+}
+
+.bulk-payment-currency-symbol.currency-right {
+    border-left: 1px solid #ddd;
+}
+
+/* Amount Input */
+.bulk-payment-amount-input {
+    flex: 1;
+    border: none !important;
+    padding: 16px 15px !important;
+    font-size: 18px !important;
+    font-weight: 600;
+    color: #333;
+    background: transparent;
+    outline: none !important;
+    box-shadow: none !important;
+    width: 100%;
+}
+
+.bulk-payment-amount-input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.bulk-payment-amount-input::placeholder {
+    color: #aaa;
+    font-weight: 400;
+}
+
+/* Amount Info */
+.bulk-payment-amount-info {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Customer Fields */
+.bulk-payment-customer-fields {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #ddd;
+}
+
+.bulk-payment-customer-fields .bulk-payment-field {
+    margin-bottom: 15px;
+}
+
+.bulk-payment-customer-fields label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.bulk-payment-customer-fields input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.bulk-payment-customer-fields input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* Button Wrapper */
+.bulk-payment-button-wrapper {
+    margin-top: 20px;
+}
+
+/* Submit Button */
+.bulk-payment-submit-button {
+    width: 100%;
+    padding: 16px 30px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff !important;
+    background: #2c3e50;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bulk-payment-submit-button:hover {
+    background: #34495e;
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(44, 62, 80, 0.4);
+}
+
+.bulk-payment-submit-button:active {
+    transform: translateY(0);
+}
+
+.bulk-payment-submit-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.bulk-payment-submit-button.loading {
+    position: relative;
+    color: transparent;
+}
+
+.bulk-payment-submit-button.loading::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 3px solid transparent;
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: button-loading-spinner 0.8s linear infinite;
+}
+
+@keyframes button-loading-spinner {
+    from {
+        transform: rotate(0turn);
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+/* Messages */
+.bulk-payment-message {
+    margin-top: 20px;
+    padding: 15px 20px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.bulk-payment-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.bulk-payment-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.bulk-payment-message.info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* Minimal Layout */
+.bulk-payment-form-container.layout-minimal .bulk-payment-form {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.bulk-payment-form-container.layout-minimal .bulk-payment-title {
+    font-size: 28px;
+}
+
+/* Compact Layout */
+.bulk-payment-form-container.layout-compact {
+    max-width: 600px;
+}
+
+.bulk-payment-form-container.layout-compact .bulk-payment-image {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .bulk-payment-form-container.layout-default {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .bulk-payment-image {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .bulk-payment-title {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .bulk-payment-description {
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+
+    .bulk-payment-form {
+        padding: 20px;
+    }
+
+    .bulk-payment-amount-input {
+        font-size: 16px !important;
+        padding: 14px 12px !important;
+    }
+
+    .bulk-payment-customer-fields input {
+        font-size: 16px !important;
+        padding: 12px 15px !important;
+    }
+
+    .bulk-payment-submit-button {
+        font-size: 16px;
+        padding: 14px 25px;
+    }
+
+    /* Stack currency symbol better on mobile */
+    .bulk-payment-currency-symbol {
+        padding: 0 12px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .bulk-payment-form-container {
+        padding: 15px 0;
+    }
+
+    .bulk-payment-title {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+
+    .bulk-payment-description {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .bulk-payment-form {
+        padding: 15px;
+        border-radius: 6px;
+    }
+
+    .bulk-payment-label {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .bulk-payment-amount-input {
+        font-size: 16px !important;
+        padding: 12px 10px !important;
+    }
+
+    .bulk-payment-customer-fields {
+        margin-top: 20px;
+        padding-top: 20px;
+    }
+
+    .bulk-payment-customer-fields input {
+        font-size: 16px !important;
+        padding: 12px !important;
+    }
+
+    .bulk-payment-customer-fields .bulk-payment-field {
+        margin-bottom: 12px;
+    }
+
+    .bulk-payment-customer-fields label {
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+
+    .bulk-payment-currency-symbol {
+        padding: 0 10px;
+        font-size: 14px;
+    }
+
+    .bulk-payment-submit-button {
+        font-size: 15px;
+        padding: 13px 20px;
+    }
+
+    .bulk-payment-amount-info {
+        font-size: 13px;
+        margin-top: 8px;
+    }
+
+    .bulk-payment-message {
+        font-size: 14px;
+        padding: 12px 15px;
+        margin-top: 15px;
+    }
+}
+
+/* Extra small devices */
+@media screen and (max-width: 360px) {
+    .bulk-payment-form-container {
+        padding: 10px 0;
+    }
+
+    .bulk-payment-title {
+        font-size: 18px;
+    }
+
+    .bulk-payment-form {
+        padding: 12px;
+    }
+
+    .bulk-payment-amount-input,
+    .bulk-payment-customer-fields input {
+        font-size: 16px !important;
+        padding: 11px 8px !important;
+    }
+
+    .bulk-payment-submit-button {
+        font-size: 14px;
+        padding: 12px 18px;
+    }
+}
+
+/* Tablet landscape */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .bulk-payment-form-container {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .bulk-payment-image {
+        flex: 0 0 40%;
+    }
+
+    .bulk-payment-content {
+        flex: 0 0 60%;
+    }
+}
+
+/* WooCommerce Notice Compatibility */
+.woocommerce-notices-wrapper + .bulk-payment-form-container {
+    margin-top: 20px;
+}
+
+/* Print Styles */
+@media print {
+    .bulk-payment-form {
+        border: 1px solid #000;
+    }
+
+    .bulk-payment-submit-button {
+        display: none;
+    }
+
+    .bulk-payment-customer-fields {
+        page-break-inside: avoid;
+    }
+}
