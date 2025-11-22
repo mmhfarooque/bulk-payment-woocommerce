@@ -3,7 +3,7 @@
  * Plugin Name: Bulk Payment for WooCommerce
  * Plugin URI: https://jezweb.com
  * Description: Allow customers to pay any amount of money for a symbolic product without shipping information. Perfect for donations, custom payments, and flexible pricing.
- * Version: 1.0.5
+ * Version: 1.0.6
  * Author: Jezweb
  * Author URI: https://jezweb.com
  * Developer: Mahmud Farooque
@@ -22,8 +22,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// Auto-update test version - verifies GitHub update detection works
+
 // Define plugin constants
-define('BULK_PAYMENT_WC_VERSION', '1.0.5');
+define('BULK_PAYMENT_WC_VERSION', '1.0.6');
 define('BULK_PAYMENT_WC_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('BULK_PAYMENT_WC_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('BULK_PAYMENT_WC_PLUGIN_BASENAME', plugin_basename(__FILE__));

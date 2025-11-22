@@ -5,6 +5,16 @@ All notable changes to Bulk Payment for WooCommerce will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.6] - 2025-11-22
+
+### Purpose
+- **Auto-Update Test Release** - This version tests the GitHub-based automatic update system
+- Verifies that users on v1.0.5 can detect and install updates automatically
+- No functional changes from v1.0.5
+
+### Technical
+- Added version test comment to verify update detection
+
 ## [1.0.5] - 2025-11-22
 
 ### Changed
@@ -37,7 +47,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History
 
-### [1.0.5] - Current Release
+### [1.0.6] - Current Release
+Auto-update test release - verifies update system works correctly.
+
+### [1.0.5] - Previous Release
 Latest version with auto-updates and improved button styling.
 
 ### [1.0.4] - Previous Release
