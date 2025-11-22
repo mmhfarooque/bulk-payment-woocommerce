@@ -43,6 +43,7 @@ composer.lock
 # Build files
 dist/
 build/
+releases/
 *.zip
 *.tar.gz
 
