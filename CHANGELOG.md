@@ -5,15 +5,31 @@ All notable changes to Bulk Payment for WooCommerce will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.9] - 2025-11-26
+## [1.1.0] - 2025-11-26
+
+### Added
+- **Button Customization** - New admin settings section for Pay Now button styling
+  - Button background color
+  - Button text color
+  - Button hover background color
+  - Button font size (default: 22px)
+  - Button border radius (default: 50px for pill shape)
+
+### Changed
+- **Improved Button Styling** - Updated default button appearance
+  - Larger font size (22px up from 18px)
+  - Rounder button with pill shape (50px border-radius)
+  - Increased letter spacing for better readability
 
 ### Fixed
 - **Product Purchasable Fix** - Fixed "Sorry, this product cannot be purchased" error
   - Added `woocommerce_is_purchasable` filter to make bulk payment products always purchasable
-  - WooCommerce by default considers $0 products as not purchasable - this is now overridden for bulk payment products
+  - WooCommerce by default considers $0 products as not purchasable - this is now overridden
 
 ### Technical
 - Added `make_bulk_payment_purchasable()` method to `Bulk_Payment_Cart` class
+- Added button customization options to admin settings
+- Extended `output_custom_styles()` to include button styling
 
 ## [1.0.8] - 2025-11-26
 
@@ -89,8 +105,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History
 
-### [1.0.9] - Current Release
-Fixed "product cannot be purchased" error for bulk payment products.
+### [1.1.0] - Current Release
+Button customization, improved styling, and purchasable fix.
 
 ### [1.0.8] - Previous Release
 Improved guest checkout, WordPress 6.7+ and PHP 8.1+ compatibility fixes.

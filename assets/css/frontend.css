@@ -203,18 +203,18 @@
 /* Submit Button */
 .bulk-payment-submit-button {
     width: 100%;
-    padding: 16px 30px;
-    font-size: 18px;
+    padding: 18px 35px;
+    font-size: 22px;
     font-weight: 700;
     font-family: "baskerville-poster-pt", Georgia, serif;
     color: #fff !important;
     background: #2c3e50;
     border: none;
-    border-radius: 7px;
+    border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
 }
 
 .bulk-payment-submit-button:hover {

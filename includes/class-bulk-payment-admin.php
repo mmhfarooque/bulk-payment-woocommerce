@@ -128,6 +128,13 @@ class Bulk_Payment_Admin {
             update_option('bulk_payment_accent_color', sanitize_hex_color($_POST['bulk_payment_accent_color']));
             update_option('bulk_payment_font_family', sanitize_text_field($_POST['bulk_payment_font_family']));
 
+            // Save button settings
+            update_option('bulk_payment_button_bg_color', sanitize_hex_color($_POST['bulk_payment_button_bg_color']));
+            update_option('bulk_payment_button_text_color', sanitize_hex_color($_POST['bulk_payment_button_text_color']));
+            update_option('bulk_payment_button_hover_bg_color', sanitize_hex_color($_POST['bulk_payment_button_hover_bg_color']));
+            update_option('bulk_payment_button_font_size', absint($_POST['bulk_payment_button_font_size']));
+            update_option('bulk_payment_button_border_radius', absint($_POST['bulk_payment_button_border_radius']));
+
             // Update product settings
             if (isset($_POST['bulk_payment_product_title'])) {
                 Bulk_Payment_Product_Creator::update_bulk_payment_product(array(
@@ -161,6 +168,13 @@ class Bulk_Payment_Admin {
         $text_color = get_option('bulk_payment_text_color', '');
         $accent_color = get_option('bulk_payment_accent_color', '');
         $font_family = get_option('bulk_payment_font_family', '');
+
+        // Button settings
+        $button_bg_color = get_option('bulk_payment_button_bg_color', '');
+        $button_text_color = get_option('bulk_payment_button_text_color', '');
+        $button_hover_bg_color = get_option('bulk_payment_button_hover_bg_color', '');
+        $button_font_size = get_option('bulk_payment_button_font_size', '');
+        $button_border_radius = get_option('bulk_payment_button_border_radius', '');
 
         // Get product ID
         $product_id = Bulk_Payment_Product_Creator::get_bulk_payment_product_id();
@@ -393,6 +407,51 @@ class Bulk_Payment_Admin {
                     </tr>
                 </table>
 
+                <h2 style="margin-top: 40px;"><?php _e('Button Customization', 'bulk-payment-wc'); ?></h2>
+                <p><?php _e('Customize the appearance of the Pay Now button.', 'bulk-payment-wc'); ?></p>
+
+                <table class="form-table">
+                    <tr>
+                        <th scope="row"><?php _e('Button Background Color', 'bulk-payment-wc'); ?></th>
+                        <td>
+                            <input type="text" name="bulk_payment_button_bg_color" value="<?php echo esc_attr($button_bg_color); ?>" class="bulk-payment-color-picker" data-default-color="">
+                            <p class="description"><?php _e('Background color for the button. Default: Uses primary color or #2c3e50', 'bulk-payment-wc'); ?></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row"><?php _e('Button Text Color', 'bulk-payment-wc'); ?></th>
+                        <td>
+                            <input type="text" name="bulk_payment_button_text_color" value="<?php echo esc_attr($button_text_color); ?>" class="bulk-payment-color-picker" data-default-color="">
+                            <p class="description"><?php _e('Text color for the button. Default: #ffffff', 'bulk-payment-wc'); ?></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row"><?php _e('Button Hover Background', 'bulk-payment-wc'); ?></th>
+                        <td>
+                            <input type="text" name="bulk_payment_button_hover_bg_color" value="<?php echo esc_attr($button_hover_bg_color); ?>" class="bulk-payment-color-picker" data-default-color="">
+                            <p class="description"><?php _e('Background color when hovering over the button. Default: Darker shade of background', 'bulk-payment-wc'); ?></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row"><?php _e('Button Font Size', 'bulk-payment-wc'); ?></th>
+                        <td>
+                            <input type="number" name="bulk_payment_button_font_size" value="<?php echo esc_attr($button_font_size); ?>" min="12" max="36" step="1" style="width: 80px;"> px
+                            <p class="description"><?php _e('Font size for the button text. Default: 22px', 'bulk-payment-wc'); ?></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row"><?php _e('Button Border Radius', 'bulk-payment-wc'); ?></th>
+                        <td>
+                            <input type="number" name="bulk_payment_button_border_radius" value="<?php echo esc_attr($button_border_radius); ?>" min="0" max="100" step="1" style="width: 80px;"> px
+                            <p class="description"><?php _e('Border radius for rounded corners. Use 50+ for pill shape. Default: 50px', 'bulk-payment-wc'); ?></p>
+                        </td>
+                    </tr>
+                </table>
+
                 <h2 style="margin-top: 40px;"><?php _e('Usage', 'bulk-payment-wc'); ?></h2>
                 <table class="form-table">
                     <tr>
@@ -587,12 +646,23 @@ class Bulk_Payment_Admin {
         $accent_color = get_option('bulk_payment_accent_color', '');
         $font_family = get_option('bulk_payment_font_family', '');
 
-        // Only output if at least one style setting is configured
-        if (empty($primary_color) && empty($secondary_color) && empty($text_color) && empty($accent_color) && empty($font_family)) {
+        // Get button settings
+        $button_bg_color = get_option('bulk_payment_button_bg_color', '');
+        $button_text_color = get_option('bulk_payment_button_text_color', '');
+        $button_hover_bg_color = get_option('bulk_payment_button_hover_bg_color', '');
+        $button_font_size = get_option('bulk_payment_button_font_size', '');
+        $button_border_radius = get_option('bulk_payment_button_border_radius', '');
+
+        // Check if any setting is configured
+        $has_style_settings = !empty($primary_color) || !empty($secondary_color) || !empty($text_color) || !empty($accent_color) || !empty($font_family);
+        $has_button_settings = !empty($button_bg_color) || !empty($button_text_color) || !empty($button_hover_bg_color) || !empty($button_font_size) || !empty($button_border_radius);
+
+        // Only output if at least one setting is configured
+        if (!$has_style_settings && !$has_button_settings) {
             return;
         }
 
-        // Calculate hover color (darker version of primary color)
+        // Calculate hover color (darker version of primary or button bg color)
         $hover_color = '';
         if (!empty($primary_color)) {
             $hover_color = $this->darken_color($primary_color, 10);
@@ -673,6 +743,44 @@ class Bulk_Payment_Admin {
             .bulk-payment-customer-fields input:focus {
                 border-color: <?php echo esc_attr($accent_color); ?> !important;
                 box-shadow: 0 0 0 3px <?php echo esc_attr($accent_color); ?>33 !important;
+            }
+            <?php endif; ?>
+
+            /* Button Customization */
+            <?php if (!empty($button_bg_color)): ?>
+            .bulk-payment-submit-button {
+                background: <?php echo esc_attr($button_bg_color); ?> !important;
+            }
+            <?php endif; ?>
+
+            <?php if (!empty($button_text_color)): ?>
+            .bulk-payment-submit-button {
+                color: <?php echo esc_attr($button_text_color); ?> !important;
+            }
+            .bulk-payment-submit-button:hover {
+                color: <?php echo esc_attr($button_text_color); ?> !important;
+            }
+            <?php endif; ?>
+
+            <?php if (!empty($button_hover_bg_color)): ?>
+            .bulk-payment-submit-button:hover {
+                background: <?php echo esc_attr($button_hover_bg_color); ?> !important;
+            }
+            <?php elseif (!empty($button_bg_color)): ?>
+            .bulk-payment-submit-button:hover {
+                background: <?php echo esc_attr($this->darken_color($button_bg_color, 10)); ?> !important;
+            }
+            <?php endif; ?>
+
+            <?php if (!empty($button_font_size)): ?>
+            .bulk-payment-submit-button {
+                font-size: <?php echo esc_attr($button_font_size); ?>px !important;
+            }
+            <?php endif; ?>
+
+            <?php if (!empty($button_border_radius)): ?>
+            .bulk-payment-submit-button {
+                border-radius: <?php echo esc_attr($button_border_radius); ?>px !important;
             }
             <?php endif; ?>
         </style>
