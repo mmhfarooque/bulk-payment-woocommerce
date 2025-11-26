@@ -3,10 +3,337 @@
  *
  * @package Bulk_Payment_WC
  *
- * Default neutral styles - can be customized via admin settings
+ * Modern flexbox-based responsive layout
  */
 
-/* Product Meta Box Styles */
+/* =====================================================
+   Admin Wrapper & Header
+   ===================================================== */
+.bulk-payment-admin-wrap {
+    max-width: 1200px;
+}
+
+.bp-admin-header {
+    background: #fff;
+    padding: 24px;
+    margin: 20px 0;
+    border-left: 4px solid #2c3e50;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.bp-admin-header h2 {
+    margin: 0 0 8px 0;
+    color: #1d2327;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.bp-admin-header p {
+    margin: 0 0 4px 0;
+    color: #50575e;
+    line-height: 1.5;
+}
+
+/* =====================================================
+   Settings Sections
+   ===================================================== */
+.bp-settings-section {
+    background: #fff;
+    padding: 24px;
+    margin-bottom: 24px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.bp-section-title {
+    margin: 0 0 8px 0;
+    padding: 0 0 16px 0;
+    border-bottom: 1px solid #e2e4e7;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+.bp-section-description {
+    margin: 0 0 20px 0;
+    color: #50575e;
+    line-height: 1.5;
+}
+
+/* =====================================================
+   Form Rows - Flexbox Layout
+   ===================================================== */
+.bp-form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f0f0f1;
+}
+
+.bp-form-row:last-child {
+    border-bottom: none;
+}
+
+.bp-form-label {
+    flex: 0 0 200px;
+    padding-top: 8px;
+}
+
+.bp-form-label label {
+    font-weight: 600;
+    color: #1d2327;
+    font-size: 14px;
+}
+
+.bp-form-field {
+    flex: 1;
+    min-width: 300px;
+}
+
+.bp-form-field-wide {
+    flex: 1 1 100%;
+    min-width: 100%;
+}
+
+/* =====================================================
+   Form Row Groups (Side by Side)
+   ===================================================== */
+.bp-form-row-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.bp-form-row-group .bp-form-row {
+    flex: 1;
+    min-width: 280px;
+}
+
+.bp-form-row-group .bp-form-row.bp-half {
+    flex: 1 1 calc(50% - 12px);
+}
+
+/* Color Grid - 2x2 Layout */
+.bp-color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.bp-color-grid .bp-form-row {
+    padding: 12px 0;
+    border-bottom: none;
+}
+
+/* =====================================================
+   Form Inputs
+   ===================================================== */
+.bp-input-text,
+.bp-input-number,
+.bp-select {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #2c3338;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.bp-input-text:focus,
+.bp-input-number:focus,
+.bp-select:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: none;
+}
+
+.bp-input-small {
+    width: 80px;
+    padding: 8px 12px;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #2c3338;
+}
+
+.bp-input-with-unit {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bp-unit {
+    color: #50575e;
+    font-size: 14px;
+}
+
+/* =====================================================
+   Field Descriptions
+   ===================================================== */
+.bp-field-description {
+    margin: 8px 0 0 0;
+    font-size: 13px;
+    color: #646970;
+    line-height: 1.4;
+}
+
+/* =====================================================
+   Checkbox & Radio Styles
+   ===================================================== */
+.bp-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.bp-checkbox-label input[type="checkbox"] {
+    margin-top: 2px;
+}
+
+.bp-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.bp-radio-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    padding: 12px 16px;
+    border: 1px solid #e2e4e7;
+    border-radius: 4px;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.bp-radio-label:hover {
+    border-color: #2271b1;
+    background: #f6f7f7;
+}
+
+.bp-radio-label input[type="radio"] {
+    margin-top: 4px;
+}
+
+.bp-radio-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bp-radio-text strong {
+    color: #1d2327;
+}
+
+.bp-radio-description {
+    font-size: 13px;
+    color: #646970;
+}
+
+/* =====================================================
+   Image Upload
+   ===================================================== */
+.bp-image-upload {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bp-image-preview {
+    max-width: 300px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bp-image-preview img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.bp-image-preview p {
+    padding: 20px;
+    background: #f0f0f1;
+    border-radius: 4px;
+    text-align: center;
+    color: #646970;
+    margin: 0;
+}
+
+.bp-image-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* =====================================================
+   Shortcode Display
+   ===================================================== */
+.bp-shortcode {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #f0f0f1;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: Consolas, Monaco, monospace;
+    color: #1d2327;
+}
+
+.bp-link {
+    color: #2271b1;
+    text-decoration: none;
+}
+
+.bp-link:hover {
+    color: #135e96;
+    text-decoration: underline;
+}
+
+/* =====================================================
+   Submit Button
+   ===================================================== */
+.bp-submit-wrapper {
+    padding: 24px 0;
+}
+
+.bp-submit-button {
+    padding: 8px 24px !important;
+    font-size: 14px !important;
+}
+
+/* =====================================================
+   Usage Info Box
+   ===================================================== */
+.bulk-payment-usage-info {
+    background: #f6f7f7 !important;
+    border-radius: 4px;
+}
+
+.bulk-payment-usage-info h3 {
+    color: #1d2327;
+    margin: 0 0 12px 0;
+    font-size: 1.1em;
+}
+
+.bulk-payment-usage-info ol,
+.bulk-payment-usage-info ul {
+    line-height: 1.8;
+    margin: 0;
+    padding-left: 24px;
+}
+
+/* =====================================================
+   Product Meta Box Styles
+   ===================================================== */
 .bulk-payment-options {
     padding: 10px 0;
 }
@@ -50,37 +377,9 @@
     font-style: italic;
 }
 
-/* Admin Settings Page */
-.bulk-payment-admin-header {
-    margin-bottom: 30px;
-}
-
-.bulk-payment-admin-header h2 {
-    margin-top: 0;
-    color: #23282d;
-    font-size: 24px;
-}
-
-.bulk-payment-admin-header p {
-    color: #666;
-}
-
-.bulk-payment-usage-info {
-    background: #f0f0f1 !important;
-}
-
-.bulk-payment-usage-info h3 {
-    color: #23282d;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-.bulk-payment-usage-info ol,
-.bulk-payment-usage-info ul {
-    line-height: 1.8;
-}
-
-/* Product List Column */
+/* =====================================================
+   Product List Column
+   ===================================================== */
 .column-bulk_payment {
     width: 100px;
     text-align: center;
@@ -92,25 +391,17 @@
     height: 20px;
 }
 
-/* Quick Edit Styles */
+/* =====================================================
+   Quick Edit Styles
+   ===================================================== */
 .inline-edit-col .bulk-payment-quick-edit {
     clear: both;
     padding: 10px 0;
 }
 
-/* Settings Form */
-.form-table th {
-    font-weight: 600;
-    color: #333;
-}
-
-.form-table td p.description {
-    margin-top: 5px;
-    font-style: italic;
-    color: #666;
-}
-
-/* Notice Styles */
+/* =====================================================
+   Notice Styles
+   ===================================================== */
 .bulk-payment-notice {
     position: relative;
     padding: 12px 15px;
@@ -119,11 +410,12 @@
     background: #f0f6fc;
     box-shadow: 0 1px 1px rgba(0,0,0,.04);
     color: #333;
+    border-radius: 0 4px 4px 0;
 }
 
 .bulk-payment-notice.success {
     border-left-color: #00a32a;
-    background: #dff0d8;
+    background: #d1e7dd;
 }
 
 .bulk-payment-notice.error {
@@ -133,11 +425,45 @@
 
 .bulk-payment-notice.warning {
     border-left-color: #dba617;
-    background: #fcf3cf;
+    background: #fff3cd;
 }
 
-/* Responsive Styles */
+/* =====================================================
+   Responsive Styles
+   ===================================================== */
 @media screen and (max-width: 782px) {
+    .bp-form-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .bp-form-label {
+        flex: none;
+        padding-top: 0;
+    }
+
+    .bp-form-field {
+        min-width: 100%;
+    }
+
+    .bp-form-row-group {
+        flex-direction: column;
+    }
+
+    .bp-form-row-group .bp-form-row.bp-half {
+        flex: 1 1 100%;
+    }
+
+    .bp-color-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bp-input-text,
+    .bp-input-number,
+    .bp-select {
+        max-width: 100%;
+    }
+
     .column-bulk_payment {
         width: 50px;
     }
@@ -146,33 +472,55 @@
     .bulk-payment-options input[type="number"] {
         width: 100% !important;
     }
+
+    .bp-radio-label {
+        padding: 10px 12px;
+    }
 }
 
-/* Admin Color Scheme Support */
-body.admin-color-light .bulk-payment-admin-header {
+@media screen and (max-width: 480px) {
+    .bp-admin-header,
+    .bp-settings-section {
+        padding: 16px;
+    }
+
+    .bp-image-buttons {
+        flex-direction: column;
+    }
+
+    .bp-image-buttons .button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* =====================================================
+   Admin Color Scheme Support
+   ===================================================== */
+body.admin-color-light .bp-admin-header {
     border-left-color: #0073aa;
 }
 
-body.admin-color-blue .bulk-payment-admin-header {
+body.admin-color-blue .bp-admin-header {
     border-left-color: #52accc;
 }
 
-body.admin-color-coffee .bulk-payment-admin-header {
+body.admin-color-coffee .bp-admin-header {
     border-left-color: #59524c;
 }
 
-body.admin-color-ectoplasm .bulk-payment-admin-header {
+body.admin-color-ectoplasm .bp-admin-header {
     border-left-color: #523f6d;
 }
 
-body.admin-color-midnight .bulk-payment-admin-header {
+body.admin-color-midnight .bp-admin-header {
     border-left-color: #e14d43;
 }
 
-body.admin-color-ocean .bulk-payment-admin-header {
+body.admin-color-ocean .bp-admin-header {
     border-left-color: #738e96;
 }
 
-body.admin-color-sunrise .bulk-payment-admin-header {
+body.admin-color-sunrise .bp-admin-header {
     border-left-color: #dd823b;
 }

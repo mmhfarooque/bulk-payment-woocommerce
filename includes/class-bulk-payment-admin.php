@@ -180,89 +180,110 @@ class Bulk_Payment_Admin {
         $product_id = Bulk_Payment_Product_Creator::get_bulk_payment_product_id();
 
         ?>
-        <div class="wrap">
+        <div class="wrap bulk-payment-admin-wrap">
             <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 
-            <div class="bulk-payment-admin-header" style="background: #fff; padding: 20px; margin: 20px 0; border-left: 4px solid #2c3e50;">
+            <header class="bp-admin-header">
                 <h2><?php _e('Bulk Payment for WooCommerce', 'bulk-payment-wc'); ?></h2>
                 <p><?php _e('Allow customers to pay any amount of money for symbolic products without shipping information.', 'bulk-payment-wc'); ?></p>
                 <p><strong><?php _e('Version:', 'bulk-payment-wc'); ?></strong> <?php echo BULK_PAYMENT_WC_VERSION; ?></p>
-            </div>
+            </header>
 
-            <form method="post" action="">
+            <form method="post" action="" class="bp-admin-form">
                 <?php wp_nonce_field('bulk_payment_settings'); ?>
 
-                <table class="form-table">
-                    <tr>
-                        <th scope="row"><?php _e('Global Settings', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <label>
+                <!-- General Settings Section -->
+                <section class="bp-settings-section">
+                    <h2 class="bp-section-title"><?php _e('General Settings', 'bulk-payment-wc'); ?></h2>
+
+                    <div class="bp-form-row">
+                        <div class="bp-form-label">
+                            <label><?php _e('Global Settings', 'bulk-payment-wc'); ?></label>
+                        </div>
+                        <div class="bp-form-field">
+                            <label class="bp-checkbox-label">
                                 <input type="checkbox" name="bulk_payment_enable_for_all" value="yes" <?php checked($enable_for_all, 'yes'); ?>>
                                 <?php _e('Enable bulk payment for all products by default', 'bulk-payment-wc'); ?>
                             </label>
-                            <p class="description"><?php _e('When enabled, bulk payment will be available for all products unless specifically disabled.', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
+                            <p class="bp-field-description"><?php _e('When enabled, bulk payment will be available for all products unless specifically disabled.', 'bulk-payment-wc'); ?></p>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Default Amount Label', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="text" name="bulk_payment_default_label" value="<?php echo esc_attr($default_label); ?>" class="regular-text">
-                            <p class="description"><?php _e('Default label for the amount input field.', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
+                    <div class="bp-form-row">
+                        <div class="bp-form-label">
+                            <label for="bulk_payment_default_label"><?php _e('Default Amount Label', 'bulk-payment-wc'); ?></label>
+                        </div>
+                        <div class="bp-form-field">
+                            <input type="text" id="bulk_payment_default_label" name="bulk_payment_default_label" value="<?php echo esc_attr($default_label); ?>" class="bp-input-text">
+                            <p class="bp-field-description"><?php _e('Default label for the amount input field.', 'bulk-payment-wc'); ?></p>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Default Placeholder', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="text" name="bulk_payment_default_placeholder" value="<?php echo esc_attr($default_placeholder); ?>" class="regular-text">
-                            <p class="description"><?php _e('Default placeholder text for the amount input field.', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
+                    <div class="bp-form-row">
+                        <div class="bp-form-label">
+                            <label for="bulk_payment_default_placeholder"><?php _e('Default Placeholder', 'bulk-payment-wc'); ?></label>
+                        </div>
+                        <div class="bp-form-field">
+                            <input type="text" id="bulk_payment_default_placeholder" name="bulk_payment_default_placeholder" value="<?php echo esc_attr($default_placeholder); ?>" class="bp-input-text">
+                            <p class="bp-field-description"><?php _e('Default placeholder text for the amount input field.', 'bulk-payment-wc'); ?></p>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Default Minimum Amount', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="number" name="bulk_payment_default_min" value="<?php echo esc_attr($default_min); ?>" step="0.01" min="0" class="regular-text">
-                            <p class="description"><?php echo sprintf(__('Default minimum amount in %s. Leave empty for no limit.', 'bulk-payment-wc'), get_woocommerce_currency()); ?></p>
-                        </td>
-                    </tr>
+                    <div class="bp-form-row-group">
+                        <div class="bp-form-row bp-half">
+                            <div class="bp-form-label">
+                                <label for="bulk_payment_default_min"><?php _e('Default Minimum Amount', 'bulk-payment-wc'); ?></label>
+                            </div>
+                            <div class="bp-form-field">
+                                <input type="number" id="bulk_payment_default_min" name="bulk_payment_default_min" value="<?php echo esc_attr($default_min); ?>" step="0.01" min="0" class="bp-input-number">
+                                <p class="bp-field-description"><?php echo sprintf(__('Minimum amount in %s. Leave empty for no limit.', 'bulk-payment-wc'), get_woocommerce_currency()); ?></p>
+                            </div>
+                        </div>
+                        <div class="bp-form-row bp-half">
+                            <div class="bp-form-label">
+                                <label for="bulk_payment_default_max"><?php _e('Default Maximum Amount', 'bulk-payment-wc'); ?></label>
+                            </div>
+                            <div class="bp-form-field">
+                                <input type="number" id="bulk_payment_default_max" name="bulk_payment_default_max" value="<?php echo esc_attr($default_max); ?>" step="0.01" min="0" class="bp-input-number">
+                                <p class="bp-field-description"><?php echo sprintf(__('Maximum amount in %s. Leave empty for no limit.', 'bulk-payment-wc'), get_woocommerce_currency()); ?></p>
+                            </div>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Default Maximum Amount', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="number" name="bulk_payment_default_max" value="<?php echo esc_attr($default_max); ?>" step="0.01" min="0" class="regular-text">
-                            <p class="description"><?php echo sprintf(__('Default maximum amount in %s. Leave empty for no limit.', 'bulk-payment-wc'), get_woocommerce_currency()); ?></p>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row"><?php _e('Display Options', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <label>
+                    <div class="bp-form-row">
+                        <div class="bp-form-label">
+                            <label><?php _e('Display Options', 'bulk-payment-wc'); ?></label>
+                        </div>
+                        <div class="bp-form-field">
+                            <label class="bp-checkbox-label">
                                 <input type="checkbox" name="bulk_payment_hide_regular_price" value="yes" <?php checked($hide_regular_price, 'yes'); ?>>
                                 <?php _e('Hide regular price for bulk payment products', 'bulk-payment-wc'); ?>
                             </label>
-                            <p class="description"><?php _e('When enabled, the regular product price will be hidden and replaced with custom text.', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
-                </table>
+                            <p class="bp-field-description"><?php _e('When enabled, the regular product price will be hidden and replaced with custom text.', 'bulk-payment-wc'); ?></p>
+                        </div>
+                    </div>
+                </section>
 
-                <h2 style="margin-top: 40px;"><?php _e('Bulk Payment Product Configuration', 'bulk-payment-wc'); ?></h2>
-                <p><?php _e('Configure the dedicated bulk payment product that will be used with the shortcode and Elementor widget.', 'bulk-payment-wc'); ?></p>
+                <!-- Product Configuration Section -->
+                <section class="bp-settings-section">
+                    <h2 class="bp-section-title"><?php _e('Bulk Payment Product Configuration', 'bulk-payment-wc'); ?></h2>
+                    <p class="bp-section-description"><?php _e('Configure the dedicated bulk payment product that will be used with the shortcode and Elementor widget.', 'bulk-payment-wc'); ?></p>
 
-                <table class="form-table">
-                    <tr>
-                        <th scope="row"><?php _e('Product Title', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="text" name="bulk_payment_product_title" value="<?php echo esc_attr($product_title); ?>" class="regular-text">
-                            <p class="description"><?php _e('Title for the bulk payment product.', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
+                    <div class="bp-form-row">
+                        <div class="bp-form-label">
+                            <label for="bulk_payment_product_title"><?php _e('Product Title', 'bulk-payment-wc'); ?></label>
+                        </div>
+                        <div class="bp-form-field">
+                            <input type="text" id="bulk_payment_product_title" name="bulk_payment_product_title" value="<?php echo esc_attr($product_title); ?>" class="bp-input-text">
+                            <p class="bp-field-description"><?php _e('Title for the bulk payment product.', 'bulk-payment-wc'); ?></p>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Product Description', 'bulk-payment-wc'); ?></th>
-                        <td>
+                    <div class="bp-form-row">
+                        <div class="bp-form-label">
+                            <label for="bulk_payment_product_description"><?php _e('Product Description', 'bulk-payment-wc'); ?></label>
+                        </div>
+                        <div class="bp-form-field bp-form-field-wide">
                             <?php
                             wp_editor($product_description, 'bulk_payment_product_description', array(
                                 'textarea_name' => 'bulk_payment_product_description',
@@ -271,15 +292,17 @@ class Bulk_Payment_Admin {
                                 'teeny' => true,
                             ));
                             ?>
-                            <p class="description"><?php _e('Description shown on the bulk payment form.', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
+                            <p class="bp-field-description"><?php _e('Description shown on the bulk payment form.', 'bulk-payment-wc'); ?></p>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Product Image', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <div class="bulk-payment-image-upload">
-                                <div class="image-preview" style="margin-bottom: 10px;">
+                    <div class="bp-form-row">
+                        <div class="bp-form-label">
+                            <label><?php _e('Product Image', 'bulk-payment-wc'); ?></label>
+                        </div>
+                        <div class="bp-form-field">
+                            <div class="bp-image-upload">
+                                <div class="bp-image-preview">
                                     <?php if ($product_image_id): ?>
                                         <?php echo wp_get_attachment_image($product_image_id, 'medium'); ?>
                                     <?php else: ?>
@@ -287,10 +310,12 @@ class Bulk_Payment_Admin {
                                     <?php endif; ?>
                                 </div>
                                 <input type="hidden" name="bulk_payment_product_image_id" id="bulk_payment_product_image_id" value="<?php echo esc_attr($product_image_id); ?>">
-                                <button type="button" class="button bulk-payment-upload-image"><?php _e('Upload/Select Image', 'bulk-payment-wc'); ?></button>
-                                <button type="button" class="button bulk-payment-remove-image" <?php if (!$product_image_id) echo 'style="display:none;"'; ?>><?php _e('Remove Image', 'bulk-payment-wc'); ?></button>
+                                <div class="bp-image-buttons">
+                                    <button type="button" class="button bulk-payment-upload-image"><?php _e('Upload/Select Image', 'bulk-payment-wc'); ?></button>
+                                    <button type="button" class="button bulk-payment-remove-image" <?php if (!$product_image_id) echo 'style="display:none;"'; ?>><?php _e('Remove Image', 'bulk-payment-wc'); ?></button>
+                                </div>
                             </div>
-                            <p class="description"><?php _e('Image displayed on the left side of the bulk payment form.', 'bulk-payment-wc'); ?></p>
+                            <p class="bp-field-description"><?php _e('Image displayed on the left side of the bulk payment form.', 'bulk-payment-wc'); ?></p>
 
                             <script>
                             jQuery(document).ready(function($) {
@@ -315,7 +340,7 @@ class Bulk_Payment_Admin {
                                     mediaUploader.on('select', function() {
                                         var attachment = mediaUploader.state().get('selection').first().toJSON();
                                         $('#bulk_payment_product_image_id').val(attachment.id);
-                                        $('.image-preview').html('<img src="' + attachment.url + '" style="max-width: 300px;">');
+                                        $('.bp-image-preview').html('<img src="' + attachment.url + '" style="max-width: 300px;">');
                                         $('.bulk-payment-remove-image').show();
                                     });
 
@@ -325,74 +350,92 @@ class Bulk_Payment_Admin {
                                 $('.bulk-payment-remove-image').on('click', function(e) {
                                     e.preventDefault();
                                     $('#bulk_payment_product_image_id').val('');
-                                    $('.image-preview').html('<p><?php _e('No image selected', 'bulk-payment-wc'); ?></p>');
+                                    $('.bp-image-preview').html('<p><?php _e('No image selected', 'bulk-payment-wc'); ?></p>');
                                     $(this).hide();
                                 });
                             });
                             </script>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Checkout Type', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <fieldset>
-                                <label>
+                    <div class="bp-form-row">
+                        <div class="bp-form-label">
+                            <label><?php _e('Checkout Type', 'bulk-payment-wc'); ?></label>
+                        </div>
+                        <div class="bp-form-field">
+                            <div class="bp-radio-group">
+                                <label class="bp-radio-label">
                                     <input type="radio" name="bulk_payment_checkout_type" value="cart" <?php checked($checkout_type, 'cart'); ?>>
-                                    <strong><?php _e('Regular Checkout', 'bulk-payment-wc'); ?></strong>
-                                    <p class="description"><?php _e('Add to cart → Checkout page with Name, Email, Phone (no shipping)', 'bulk-payment-wc'); ?></p>
+                                    <span class="bp-radio-text">
+                                        <strong><?php _e('Regular Checkout', 'bulk-payment-wc'); ?></strong>
+                                        <span class="bp-radio-description"><?php _e('Add to cart → Checkout page with Name, Email, Phone (no shipping)', 'bulk-payment-wc'); ?></span>
+                                    </span>
                                 </label>
-                                <br><br>
-                                <label>
+                                <label class="bp-radio-label">
                                     <input type="radio" name="bulk_payment_checkout_type" value="direct" <?php checked($checkout_type, 'direct'); ?>>
-                                    <strong><?php _e('Direct Checkout', 'bulk-payment-wc'); ?></strong>
-                                    <p class="description"><?php _e('Collect Name, Email, Phone on product page → Direct to payment', 'bulk-payment-wc'); ?></p>
+                                    <span class="bp-radio-text">
+                                        <strong><?php _e('Direct Checkout', 'bulk-payment-wc'); ?></strong>
+                                        <span class="bp-radio-description"><?php _e('Collect Name, Email, Phone on product page → Direct to payment', 'bulk-payment-wc'); ?></span>
+                                    </span>
                                 </label>
-                            </fieldset>
-                        </td>
-                    </tr>
-                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-                <h2 style="margin-top: 40px;"><?php _e('Style Customization', 'bulk-payment-wc'); ?></h2>
-                <p><?php _e('Customize the colors and fonts for your bulk payment forms. Leave fields empty to use the default neutral theme.', 'bulk-payment-wc'); ?></p>
+                <!-- Style Customization Section -->
+                <section class="bp-settings-section">
+                    <h2 class="bp-section-title"><?php _e('Style Customization', 'bulk-payment-wc'); ?></h2>
+                    <p class="bp-section-description"><?php _e('Customize the colors and fonts for your bulk payment forms. Leave fields empty to use the default neutral theme.', 'bulk-payment-wc'); ?></p>
 
-                <table class="form-table">
-                    <tr>
-                        <th scope="row"><?php _e('Primary Color', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="text" name="bulk_payment_primary_color" value="<?php echo esc_attr($primary_color); ?>" class="bulk-payment-color-picker" data-default-color="">
-                            <p class="description"><?php _e('Used for buttons, borders, and primary elements. Default: #2c3e50', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
+                    <div class="bp-form-row-group bp-color-grid">
+                        <div class="bp-form-row">
+                            <div class="bp-form-label">
+                                <label for="bulk_payment_primary_color"><?php _e('Primary Color', 'bulk-payment-wc'); ?></label>
+                            </div>
+                            <div class="bp-form-field">
+                                <input type="text" id="bulk_payment_primary_color" name="bulk_payment_primary_color" value="<?php echo esc_attr($primary_color); ?>" class="bulk-payment-color-picker" data-default-color="">
+                                <p class="bp-field-description"><?php _e('Buttons, borders, primary elements. Default: #2c3e50', 'bulk-payment-wc'); ?></p>
+                            </div>
+                        </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Secondary Color', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="text" name="bulk_payment_secondary_color" value="<?php echo esc_attr($secondary_color); ?>" class="bulk-payment-color-picker" data-default-color="">
-                            <p class="description"><?php _e('Background color for forms and sections. Default: #f9f9f9', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
+                        <div class="bp-form-row">
+                            <div class="bp-form-label">
+                                <label for="bulk_payment_secondary_color"><?php _e('Secondary Color', 'bulk-payment-wc'); ?></label>
+                            </div>
+                            <div class="bp-form-field">
+                                <input type="text" id="bulk_payment_secondary_color" name="bulk_payment_secondary_color" value="<?php echo esc_attr($secondary_color); ?>" class="bulk-payment-color-picker" data-default-color="">
+                                <p class="bp-field-description"><?php _e('Form backgrounds. Default: #f9f9f9', 'bulk-payment-wc'); ?></p>
+                            </div>
+                        </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Text Color', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="text" name="bulk_payment_text_color" value="<?php echo esc_attr($text_color); ?>" class="bulk-payment-color-picker" data-default-color="">
-                            <p class="description"><?php _e('Main text color throughout the form. Default: #333', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
+                        <div class="bp-form-row">
+                            <div class="bp-form-label">
+                                <label for="bulk_payment_text_color"><?php _e('Text Color', 'bulk-payment-wc'); ?></label>
+                            </div>
+                            <div class="bp-form-field">
+                                <input type="text" id="bulk_payment_text_color" name="bulk_payment_text_color" value="<?php echo esc_attr($text_color); ?>" class="bulk-payment-color-picker" data-default-color="">
+                                <p class="bp-field-description"><?php _e('Main text color. Default: #333', 'bulk-payment-wc'); ?></p>
+                            </div>
+                        </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Accent Color', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="text" name="bulk_payment_accent_color" value="<?php echo esc_attr($accent_color); ?>" class="bulk-payment-color-picker" data-default-color="">
-                            <p class="description"><?php _e('Used for hover states and focus effects. Default: #3498db', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
+                        <div class="bp-form-row">
+                            <div class="bp-form-label">
+                                <label for="bulk_payment_accent_color"><?php _e('Accent Color', 'bulk-payment-wc'); ?></label>
+                            </div>
+                            <div class="bp-form-field">
+                                <input type="text" id="bulk_payment_accent_color" name="bulk_payment_accent_color" value="<?php echo esc_attr($accent_color); ?>" class="bulk-payment-color-picker" data-default-color="">
+                                <p class="bp-field-description"><?php _e('Hover and focus effects. Default: #3498db', 'bulk-payment-wc'); ?></p>
+                            </div>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Font Family', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <select name="bulk_payment_font_family" class="regular-text">
+                    <div class="bp-form-row">
+                        <div class="bp-form-label">
+                            <label for="bulk_payment_font_family"><?php _e('Font Family', 'bulk-payment-wc'); ?></label>
+                        </div>
+                        <div class="bp-form-field">
+                            <select id="bulk_payment_font_family" name="bulk_payment_font_family" class="bp-select">
                                 <option value="" <?php selected($font_family, ''); ?>><?php _e('Default (System Fonts)', 'bulk-payment-wc'); ?></option>
                                 <option value="Georgia, serif" <?php selected($font_family, 'Georgia, serif'); ?>>Georgia (Serif)</option>
                                 <option value="'Times New Roman', Times, serif" <?php selected($font_family, "'Times New Roman', Times, serif"); ?>>Times New Roman (Serif)</option>
@@ -402,81 +445,107 @@ class Bulk_Payment_Admin {
                                 <option value="'Courier New', Courier, monospace" <?php selected($font_family, "'Courier New', Courier, monospace"); ?>>Courier New (Monospace)</option>
                                 <option value="'Baskerville Poster PT', Georgia, serif" <?php selected($font_family, "'Baskerville Poster PT', Georgia, serif"); ?>>Baskerville Poster PT (Serif)</option>
                             </select>
-                            <p class="description"><?php _e('Choose a font family for the bulk payment forms.', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
-                </table>
+                            <p class="bp-field-description"><?php _e('Choose a font family for the bulk payment forms.', 'bulk-payment-wc'); ?></p>
+                        </div>
+                    </div>
+                </section>
 
-                <h2 style="margin-top: 40px;"><?php _e('Button Customization', 'bulk-payment-wc'); ?></h2>
-                <p><?php _e('Customize the appearance of the Pay Now button.', 'bulk-payment-wc'); ?></p>
+                <!-- Button Customization Section -->
+                <section class="bp-settings-section">
+                    <h2 class="bp-section-title"><?php _e('Button Customization', 'bulk-payment-wc'); ?></h2>
+                    <p class="bp-section-description"><?php _e('Customize the appearance of the Pay Now button.', 'bulk-payment-wc'); ?></p>
 
-                <table class="form-table">
-                    <tr>
-                        <th scope="row"><?php _e('Button Background Color', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="text" name="bulk_payment_button_bg_color" value="<?php echo esc_attr($button_bg_color); ?>" class="bulk-payment-color-picker" data-default-color="">
-                            <p class="description"><?php _e('Background color for the button. Default: Uses primary color or #2c3e50', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
+                    <div class="bp-form-row-group bp-color-grid">
+                        <div class="bp-form-row">
+                            <div class="bp-form-label">
+                                <label for="bulk_payment_button_bg_color"><?php _e('Button Background', 'bulk-payment-wc'); ?></label>
+                            </div>
+                            <div class="bp-form-field">
+                                <input type="text" id="bulk_payment_button_bg_color" name="bulk_payment_button_bg_color" value="<?php echo esc_attr($button_bg_color); ?>" class="bulk-payment-color-picker" data-default-color="">
+                                <p class="bp-field-description"><?php _e('Default: Uses primary color or #2c3e50', 'bulk-payment-wc'); ?></p>
+                            </div>
+                        </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Button Text Color', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="text" name="bulk_payment_button_text_color" value="<?php echo esc_attr($button_text_color); ?>" class="bulk-payment-color-picker" data-default-color="">
-                            <p class="description"><?php _e('Text color for the button. Default: #ffffff', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
+                        <div class="bp-form-row">
+                            <div class="bp-form-label">
+                                <label for="bulk_payment_button_text_color"><?php _e('Button Text Color', 'bulk-payment-wc'); ?></label>
+                            </div>
+                            <div class="bp-form-field">
+                                <input type="text" id="bulk_payment_button_text_color" name="bulk_payment_button_text_color" value="<?php echo esc_attr($button_text_color); ?>" class="bulk-payment-color-picker" data-default-color="">
+                                <p class="bp-field-description"><?php _e('Default: #ffffff', 'bulk-payment-wc'); ?></p>
+                            </div>
+                        </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Button Hover Background', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="text" name="bulk_payment_button_hover_bg_color" value="<?php echo esc_attr($button_hover_bg_color); ?>" class="bulk-payment-color-picker" data-default-color="">
-                            <p class="description"><?php _e('Background color when hovering over the button. Default: Darker shade of background', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
+                        <div class="bp-form-row">
+                            <div class="bp-form-label">
+                                <label for="bulk_payment_button_hover_bg_color"><?php _e('Button Hover Background', 'bulk-payment-wc'); ?></label>
+                            </div>
+                            <div class="bp-form-field">
+                                <input type="text" id="bulk_payment_button_hover_bg_color" name="bulk_payment_button_hover_bg_color" value="<?php echo esc_attr($button_hover_bg_color); ?>" class="bulk-payment-color-picker" data-default-color="">
+                                <p class="bp-field-description"><?php _e('Default: Darker shade', 'bulk-payment-wc'); ?></p>
+                            </div>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Button Font Size', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="number" name="bulk_payment_button_font_size" value="<?php echo esc_attr($button_font_size); ?>" min="12" max="36" step="1" style="width: 80px;"> px
-                            <p class="description"><?php _e('Font size for the button text. Default: 22px', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
+                    <div class="bp-form-row-group">
+                        <div class="bp-form-row bp-half">
+                            <div class="bp-form-label">
+                                <label for="bulk_payment_button_font_size"><?php _e('Button Font Size', 'bulk-payment-wc'); ?></label>
+                            </div>
+                            <div class="bp-form-field">
+                                <div class="bp-input-with-unit">
+                                    <input type="number" id="bulk_payment_button_font_size" name="bulk_payment_button_font_size" value="<?php echo esc_attr($button_font_size); ?>" min="12" max="36" step="1" class="bp-input-small">
+                                    <span class="bp-unit">px</span>
+                                </div>
+                                <p class="bp-field-description"><?php _e('Default: 22px', 'bulk-payment-wc'); ?></p>
+                            </div>
+                        </div>
+                        <div class="bp-form-row bp-half">
+                            <div class="bp-form-label">
+                                <label for="bulk_payment_button_border_radius"><?php _e('Button Border Radius', 'bulk-payment-wc'); ?></label>
+                            </div>
+                            <div class="bp-form-field">
+                                <div class="bp-input-with-unit">
+                                    <input type="number" id="bulk_payment_button_border_radius" name="bulk_payment_button_border_radius" value="<?php echo esc_attr($button_border_radius); ?>" min="0" max="100" step="1" class="bp-input-small">
+                                    <span class="bp-unit">px</span>
+                                </div>
+                                <p class="bp-field-description"><?php _e('Use 50+ for pill shape. Default: 50px', 'bulk-payment-wc'); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-                    <tr>
-                        <th scope="row"><?php _e('Button Border Radius', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <input type="number" name="bulk_payment_button_border_radius" value="<?php echo esc_attr($button_border_radius); ?>" min="0" max="100" step="1" style="width: 80px;"> px
-                            <p class="description"><?php _e('Border radius for rounded corners. Use 50+ for pill shape. Default: 50px', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
-                </table>
+                <!-- Usage Section -->
+                <section class="bp-settings-section">
+                    <h2 class="bp-section-title"><?php _e('Usage', 'bulk-payment-wc'); ?></h2>
 
-                <h2 style="margin-top: 40px;"><?php _e('Usage', 'bulk-payment-wc'); ?></h2>
-                <table class="form-table">
-                    <tr>
-                        <th scope="row"><?php _e('Shortcode', 'bulk-payment-wc'); ?></th>
-                        <td>
-                            <code>[bulk_payment_form]</code>
-                            <p class="description"><?php _e('Add this shortcode to any page or post to display the bulk payment form.', 'bulk-payment-wc'); ?></p>
+                    <div class="bp-form-row">
+                        <div class="bp-form-label">
+                            <label><?php _e('Shortcode', 'bulk-payment-wc'); ?></label>
+                        </div>
+                        <div class="bp-form-field">
+                            <code class="bp-shortcode">[bulk_payment_form]</code>
+                            <p class="bp-field-description"><?php _e('Add this shortcode to any page or post to display the bulk payment form.', 'bulk-payment-wc'); ?></p>
                             <?php if ($product_id): ?>
-                                <p><a href="<?php echo get_permalink($product_id); ?>" target="_blank"><?php _e('View Product →', 'bulk-payment-wc'); ?></a></p>
+                                <p><a href="<?php echo get_permalink($product_id); ?>" target="_blank" class="bp-link"><?php _e('View Product →', 'bulk-payment-wc'); ?></a></p>
                             <?php endif; ?>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <th scope="row"><?php _e('Elementor Widget', 'bulk-payment-wc'); ?></th>
-                        <td>
+                    <div class="bp-form-row">
+                        <div class="bp-form-label">
+                            <label><?php _e('Elementor Widget', 'bulk-payment-wc'); ?></label>
+                        </div>
+                        <div class="bp-form-field">
                             <p><?php _e('Search for "Bulk Payment Form" in the Elementor widget panel.', 'bulk-payment-wc'); ?></p>
-                            <p class="description"><?php _e('Drag and drop the widget onto your page and customize the settings.', 'bulk-payment-wc'); ?></p>
-                        </td>
-                    </tr>
-                </table>
+                            <p class="bp-field-description"><?php _e('Drag and drop the widget onto your page and customize the settings.', 'bulk-payment-wc'); ?></p>
+                        </div>
+                    </div>
+                </section>
 
-                <p class="submit">
-                    <input type="submit" name="bulk_payment_save_settings" class="button-primary" value="<?php _e('Save Settings', 'bulk-payment-wc'); ?>">
-                </p>
+                <div class="bp-submit-wrapper">
+                    <input type="submit" name="bulk_payment_save_settings" class="button button-primary bp-submit-button" value="<?php _e('Save Settings', 'bulk-payment-wc'); ?>">
+                </div>
             </form>
 
             <div class="bulk-payment-usage-info" style="background: #f7f7f7; padding: 20px; margin: 20px 0; border-radius: 4px;">

@@ -5,6 +5,23 @@ All notable changes to Bulk Payment for WooCommerce will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2025-11-26
+
+### Changed
+- **Modern Admin Layout** - Completely refactored admin settings page
+  - Removed all HTML tables - now uses semantic HTML5 with flexbox/grid
+  - Fully responsive layout that works on all screen sizes
+  - Clean, modern card-based design with proper sections
+  - Improved form field grouping (color pickers in grid, min/max side-by-side)
+  - Better radio button styling with card-like appearance
+  - Enhanced image upload UI
+
+### Technical
+- Replaced `<table class="form-table">` with flexbox-based `.bp-form-row` layout
+- Added CSS Grid for color picker sections (`.bp-color-grid`)
+- Responsive breakpoints at 782px and 480px
+- New CSS classes: `.bp-settings-section`, `.bp-form-row`, `.bp-form-label`, `.bp-form-field`
+
 ## [1.1.0] - 2025-11-26
 
 ### Added
@@ -105,7 +122,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History
 
-### [1.1.0] - Current Release
+### [1.1.1] - Current Release
+Modern admin layout with flexbox/grid, removed all HTML tables.
+
+### [1.1.0] - Previous Release
 Button customization, improved styling, and purchasable fix.
 
 ### [1.0.8] - Previous Release
