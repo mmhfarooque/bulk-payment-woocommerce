@@ -273,12 +273,45 @@ class Bulk_Payment_Shortcode {
     }
 
     /**
+     * Ensure WooCommerce session and cart are initialized for guest users
+     */
+    private function ensure_wc_session() {
+        // Ensure WooCommerce is loaded
+        if (!function_exists('WC')) {
+            return false;
+        }
+
+        // Initialize session for guests if not already done
+        if (!WC()->session) {
+            WC()->session = new WC_Session_Handler();
+            WC()->session->init();
+        }
+
+        // Ensure customer is initialized
+        if (!WC()->customer) {
+            WC()->customer = new WC_Customer(get_current_user_id(), true);
+        }
+
+        // Ensure cart is initialized
+        if (!WC()->cart) {
+            WC()->cart = new WC_Cart();
+        }
+
+        return true;
+    }
+
+    /**
      * AJAX add to cart handler
      */
     public function ajax_add_to_cart() {
         // Verify nonce
         if (!isset($_POST['bulk_payment_nonce']) || !wp_verify_nonce($_POST['bulk_payment_nonce'], 'bulk_payment_nonce')) {
             wp_send_json_error(array('message' => __('Security check failed', 'bulk-payment-wc')));
+        }
+
+        // Ensure WooCommerce session is initialized for guests
+        if (!$this->ensure_wc_session()) {
+            wp_send_json_error(array('message' => __('WooCommerce is not available', 'bulk-payment-wc')));
         }
 
         // Get product ID
@@ -338,6 +371,11 @@ class Bulk_Payment_Shortcode {
         // Verify nonce
         if (!isset($_POST['bulk_payment_nonce']) || !wp_verify_nonce($_POST['bulk_payment_nonce'], 'bulk_payment_nonce')) {
             wp_send_json_error(array('message' => __('Security check failed', 'bulk-payment-wc')));
+        }
+
+        // Ensure WooCommerce session is initialized for guests
+        if (!$this->ensure_wc_session()) {
+            wp_send_json_error(array('message' => __('WooCommerce is not available', 'bulk-payment-wc')));
         }
 
         // Get product ID

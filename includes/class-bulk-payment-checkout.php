@@ -34,6 +34,10 @@ class Bulk_Payment_Checkout {
      * Constructor
      */
     private function __construct() {
+        // Force enable guest checkout for bulk payment products
+        add_filter('pre_option_woocommerce_enable_guest_checkout', array($this, 'force_guest_checkout'), 10, 1);
+        add_filter('woocommerce_checkout_registration_required', array($this, 'disable_registration_required'), 10, 1);
+
         // Remove shipping fields if cart has only bulk payment products
         add_filter('woocommerce_checkout_fields', array($this, 'maybe_remove_shipping_fields'), 10, 1);
 
@@ -51,6 +55,46 @@ class Bulk_Payment_Checkout {
 
         // Pre-fill checkout fields from session
         add_filter('woocommerce_checkout_get_value', array($this, 'prefill_checkout_fields'), 10, 2);
+    }
+
+    /**
+     * Force enable guest checkout when cart contains bulk payment products
+     *
+     * @param mixed $value The original option value
+     * @return string 'yes' if cart has bulk payment products, original value otherwise
+     */
+    public function force_guest_checkout($value) {
+        // Check if we're in a context where cart is available
+        if (!function_exists('WC') || !WC()->cart) {
+            return $value;
+        }
+
+        // If cart has bulk payment products, force enable guest checkout
+        if (Bulk_Payment_Cart::cart_has_bulk_payment_products()) {
+            return 'yes';
+        }
+
+        return $value;
+    }
+
+    /**
+     * Disable registration required for bulk payment products
+     *
+     * @param bool $required Whether registration is required
+     * @return bool False if cart has bulk payment products
+     */
+    public function disable_registration_required($required) {
+        // Check if we're in a context where cart is available
+        if (!function_exists('WC') || !WC()->cart) {
+            return $required;
+        }
+
+        // If cart has bulk payment products, don't require registration
+        if (Bulk_Payment_Cart::cart_has_bulk_payment_products()) {
+            return false;
+        }
+
+        return $required;
     }
 
     /**

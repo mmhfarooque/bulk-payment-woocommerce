@@ -5,6 +5,20 @@ All notable changes to Bulk Payment for WooCommerce will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.7] - 2025-11-26
+
+### Fixed
+- **Guest Checkout Support** - Fixed "Failed to add to cart" error for non-logged-in users
+  - Plugin now forces guest checkout to be enabled for bulk payment products
+  - Added WooCommerce session initialization for guest users during AJAX requests
+  - Registration is no longer required when cart contains bulk payment products
+
+### Technical
+- Added `force_guest_checkout()` filter on `pre_option_woocommerce_enable_guest_checkout`
+- Added `disable_registration_required()` filter on `woocommerce_checkout_registration_required`
+- Added `ensure_wc_session()` helper method to initialize WC session, customer, and cart for guests
+- Updated both `ajax_add_to_cart()` and `ajax_direct_checkout()` handlers with session initialization
+
 ## [1.0.6] - 2025-11-22
 
 ### Purpose
@@ -47,11 +61,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History
 
-### [1.0.6] - Current Release
+### [1.0.7] - Current Release
+Guest checkout fix - non-logged-in users can now add to cart and checkout.
+
+### [1.0.6] - Previous Release
 Auto-update test release - verifies update system works correctly.
 
 ### [1.0.5] - Previous Release
-Latest version with auto-updates and improved button styling.
+Version with auto-updates and improved button styling.
 
 ### [1.0.4] - Previous Release
 Initial public release with all core features.
