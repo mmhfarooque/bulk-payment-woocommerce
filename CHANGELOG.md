@@ -5,6 +5,16 @@ All notable changes to Bulk Payment for WooCommerce will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.9] - 2025-11-26
+
+### Fixed
+- **Product Purchasable Fix** - Fixed "Sorry, this product cannot be purchased" error
+  - Added `woocommerce_is_purchasable` filter to make bulk payment products always purchasable
+  - WooCommerce by default considers $0 products as not purchasable - this is now overridden for bulk payment products
+
+### Technical
+- Added `make_bulk_payment_purchasable()` method to `Bulk_Payment_Cart` class
+
 ## [1.0.8] - 2025-11-26
 
 ### Fixed
@@ -79,7 +89,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History
 
-### [1.0.8] - Current Release
+### [1.0.9] - Current Release
+Fixed "product cannot be purchased" error for bulk payment products.
+
+### [1.0.8] - Previous Release
 Improved guest checkout, WordPress 6.7+ and PHP 8.1+ compatibility fixes.
 
 ### [1.0.7] - Previous Release

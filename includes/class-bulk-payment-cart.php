@@ -34,6 +34,9 @@ class Bulk_Payment_Cart {
      * Constructor
      */
     private function __construct() {
+        // Make bulk payment products always purchasable (even with $0 price)
+        add_filter('woocommerce_is_purchasable', array($this, 'make_bulk_payment_purchasable'), 10, 2);
+
         // Update cart item price based on custom amount
         add_action('woocommerce_before_calculate_totals', array($this, 'update_cart_item_price'), 10, 1);
 
@@ -47,6 +50,28 @@ class Bulk_Payment_Cart {
 
         // Save custom amount to order item meta
         add_action('woocommerce_checkout_create_order_line_item', array($this, 'save_custom_amount_to_order_item'), 10, 4);
+    }
+
+    /**
+     * Make bulk payment products always purchasable
+     * WooCommerce considers $0 products as not purchasable by default
+     *
+     * @param bool $purchasable Whether the product is purchasable
+     * @param WC_Product $product The product object
+     * @return bool
+     */
+    public function make_bulk_payment_purchasable($purchasable, $product) {
+        if (!$product) {
+            return $purchasable;
+        }
+
+        $enabled = get_post_meta($product->get_id(), '_bulk_payment_enabled', true);
+
+        if ($enabled === 'yes') {
+            return true;
+        }
+
+        return $purchasable;
     }
 
     /**
