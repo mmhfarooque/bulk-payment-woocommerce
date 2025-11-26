@@ -697,10 +697,10 @@ class Bulk_Payment_Admin {
             $b = hexdec(substr($hex, 4, 2));
         }
 
-        // Darken
-        $r = max(0, min(255, $r - ($r * $percent / 100)));
-        $g = max(0, min(255, $g - ($g * $percent / 100)));
-        $b = max(0, min(255, $b - ($b * $percent / 100)));
+        // Darken and cast to int to avoid PHP 8.1+ deprecation warnings
+        $r = (int) max(0, min(255, $r - ($r * $percent / 100)));
+        $g = (int) max(0, min(255, $g - ($g * $percent / 100)));
+        $b = (int) max(0, min(255, $b - ($b * $percent / 100)));
 
         // Convert back to hex
         $r = str_pad(dechex($r), 2, '0', STR_PAD_LEFT);

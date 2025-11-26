@@ -277,23 +277,31 @@ class Bulk_Payment_Shortcode {
      */
     private function ensure_wc_session() {
         // Ensure WooCommerce is loaded
-        if (!function_exists('WC')) {
+        if (!function_exists('WC') || !WC()) {
             return false;
         }
 
+        // Load cart functions if not loaded
+        if (!function_exists('wc_get_cart_item_data_hash')) {
+            include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
+        }
+
         // Initialize session for guests if not already done
-        if (!WC()->session) {
+        if (is_null(WC()->session) || !WC()->session->has_session()) {
             WC()->session = new WC_Session_Handler();
             WC()->session->init();
+
+            // Set cookie to establish session
+            WC()->session->set_customer_session_cookie(true);
         }
 
         // Ensure customer is initialized
-        if (!WC()->customer) {
+        if (is_null(WC()->customer)) {
             WC()->customer = new WC_Customer(get_current_user_id(), true);
         }
 
         // Ensure cart is initialized
-        if (!WC()->cart) {
+        if (is_null(WC()->cart)) {
             WC()->cart = new WC_Cart();
         }
 
@@ -351,6 +359,9 @@ class Bulk_Payment_Shortcode {
             'unique_key' => md5(microtime() . rand()),
         );
 
+        // Clear any existing notices before adding to cart
+        wc_clear_notices();
+
         $cart_item_key = WC()->cart->add_to_cart($product_id, 1, 0, array(), $cart_item_data);
 
         if ($cart_item_key) {
@@ -360,7 +371,26 @@ class Bulk_Payment_Shortcode {
                 'cart_count' => WC()->cart->get_cart_contents_count(),
             ));
         } else {
-            wp_send_json_error(array('message' => __('Failed to add to cart', 'bulk-payment-wc')));
+            // Get WooCommerce notices to understand the error
+            $notices = wc_get_notices('error');
+            $error_message = __('Failed to add to cart', 'bulk-payment-wc');
+
+            if (!empty($notices)) {
+                $error_messages = array();
+                foreach ($notices as $notice) {
+                    if (is_array($notice) && isset($notice['notice'])) {
+                        $error_messages[] = wp_strip_all_tags($notice['notice']);
+                    } elseif (is_string($notice)) {
+                        $error_messages[] = wp_strip_all_tags($notice);
+                    }
+                }
+                if (!empty($error_messages)) {
+                    $error_message = implode(' ', $error_messages);
+                }
+                wc_clear_notices();
+            }
+
+            wp_send_json_error(array('message' => $error_message));
         }
     }
 
@@ -423,6 +453,9 @@ class Bulk_Payment_Shortcode {
         // Clear cart and add bulk payment product
         WC()->cart->empty_cart();
 
+        // Clear any existing notices before adding to cart
+        wc_clear_notices();
+
         $cart_item_data = array(
             'bulk_payment_amount' => $amount,
             'unique_key' => md5(microtime() . rand()),
@@ -431,7 +464,26 @@ class Bulk_Payment_Shortcode {
         $cart_item_key = WC()->cart->add_to_cart($product_id, 1, 0, array(), $cart_item_data);
 
         if (!$cart_item_key) {
-            wp_send_json_error(array('message' => __('Failed to add to cart', 'bulk-payment-wc')));
+            // Get WooCommerce notices to understand the error
+            $notices = wc_get_notices('error');
+            $error_message = __('Failed to add to cart', 'bulk-payment-wc');
+
+            if (!empty($notices)) {
+                $error_messages = array();
+                foreach ($notices as $notice) {
+                    if (is_array($notice) && isset($notice['notice'])) {
+                        $error_messages[] = wp_strip_all_tags($notice['notice']);
+                    } elseif (is_string($notice)) {
+                        $error_messages[] = wp_strip_all_tags($notice);
+                    }
+                }
+                if (!empty($error_messages)) {
+                    $error_message = implode(' ', $error_messages);
+                }
+                wc_clear_notices();
+            }
+
+            wp_send_json_error(array('message' => $error_message));
         }
 
         // Store customer data in session for checkout

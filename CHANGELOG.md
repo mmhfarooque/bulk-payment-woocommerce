@@ -5,6 +5,24 @@ All notable changes to Bulk Payment for WooCommerce will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.8] - 2025-11-26
+
+### Fixed
+- **Guest Checkout Support (Improved)** - Enhanced session handling for non-logged-in users
+  - Improved WooCommerce session initialization with proper cookie handling
+  - Added `set_customer_session_cookie(true)` to establish session for guests
+  - Better error messages now show actual WooCommerce error instead of generic "Failed to add to cart"
+- **WordPress 6.7+ Compatibility** - Fixed translation loading too early warning
+  - Moved `load_plugin_textdomain()` to `init` action as required by WordPress 6.7+
+- **PHP 8.1+ Compatibility** - Fixed float to int conversion deprecation warnings
+  - Cast color values to int in `darken_color()` function before passing to `dechex()`
+
+### Technical
+- Improved `ensure_wc_session()` to check `has_session()` and set session cookie
+- Added `wc_clear_notices()` before add-to-cart to capture actual error messages
+- Added error notice extraction to show real WooCommerce errors to users
+- Moved textdomain loading to separate `load_textdomain()` method hooked to `init`
+
 ## [1.0.7] - 2025-11-26
 
 ### Fixed
@@ -61,7 +79,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History
 
-### [1.0.7] - Current Release
+### [1.0.8] - Current Release
+Improved guest checkout, WordPress 6.7+ and PHP 8.1+ compatibility fixes.
+
+### [1.0.7] - Previous Release
 Guest checkout fix - non-logged-in users can now add to cart and checkout.
 
 ### [1.0.6] - Previous Release
